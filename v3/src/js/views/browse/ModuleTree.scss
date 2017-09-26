@@ -1,0 +1,100 @@
+@import '~styles/utils/modules-entry.scss';
+
+$cell-border-radius: 8px;
+$connector-height: 1rem;
+$connector-radius: 5px;
+$connector-line: 1px solid $gray-lighter;
+
+.root {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.root::before {
+  display: none;
+}
+
+.tree {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 1rem 0 0;
+  margin: 0;
+  text-align: center;
+  list-style: none;
+}
+
+.tree::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: $connector-height;
+  border-left: $connector-line;
+}
+
+.node {
+  display: inline-block;
+  padding: 0.5rem;
+  text-align: center;
+  border: 1px solid $gray-light;
+  border-radius: $cell-border-radius;
+}
+
+.conditional {
+  padding: 0;
+  border: 0;
+}
+
+.branch {
+  position: relative;
+  padding: $connector-height 0;
+  // float: left;
+}
+
+.branch::before,
+.branch::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 50%;
+  width: 50%;
+  height: $connector-height;
+  border-top: $connector-line;
+}
+
+.branch::after {
+  top: 0;
+  right: auto;
+  left: 50%;
+  border-left: $connector-line;
+}
+
+/* We need to remove left-right connectors from elements without any siblings */
+.branch:only-child::after,
+.tree .branch:only-child::before {
+  display: none;
+}
+
+/* Remove space from the top of single children */
+.branch:only-child {
+  padding-top: 0;
+}
+
+/* Remove left connector from first child and right connector from last child */
+.branch:first-child::before,
+.branch:last-child::after {
+  border: 0 none;
+}
+
+/* Adding back the vertical connector to the last nodes */
+.branch:last-child::before {
+  border-right: $connector-line;
+  border-radius: 0 $connector-radius 0 0;
+}
+
+.branch:first-child::after {
+  border-radius: $connector-radius 0 0 0;
+}
