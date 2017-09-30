@@ -13,7 +13,7 @@ module.exports = {
     '<rootDir>/.eslintrc.js',
   ],
   collectCoverageFrom: [
-    '<rootDir>/src/**/*.{js|jsx}',
+    'src/**/*.{js|jsx}',
   ],
   setupFiles: ['<rootDir>/scripts/test.js'],
   moduleNameMapper: {
